@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "431850626394",
+    "project_id": "pawtrait-297009",
+    "storage_bucket": "pawtrait-297009.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:431850626394:android:b7ac09c1f221df03d0a763",
+        "android_client_info": {
+          "package_name": "com.theweirdlywired.pawtrait"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "431850626394-u680a2em9jih6tenr5il1rv6st30m5tn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaffzoih1o4jKB5kbswiOBSH5LCEt8LO0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "431850626394-u680a2em9jih6tenr5il1rv6st30m5tn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
