@@ -35,7 +35,9 @@ class _BottomTabNavigationState extends State<BottomTabNavigation> {
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.pushNamed(context, "/add_pet"),
         tooltip: 'Add Pets',
-        child: Icon(Icons.add),
+        child: Icon(
+          Icons.add,
+        ),
         elevation: 12.0,
       ),
       bottomNavigationBar: BottomAppBar(
@@ -52,6 +54,7 @@ class _BottomTabNavigationState extends State<BottomTabNavigation> {
                   icon: Icon(
                     Icons.home,
                     size: 36,
+                    color: _selectedIndex == 0 ? Colors.blue : Colors.black,
                   ),
                   onPressed: () => _onItemTapped(0),
                 ),
@@ -59,6 +62,7 @@ class _BottomTabNavigationState extends State<BottomTabNavigation> {
                   icon: Icon(
                     Icons.pets,
                     size: 36,
+                    color: _selectedIndex == 1 ? Colors.blue : Colors.black,
                   ),
                   onPressed: () => _onItemTapped(1),
                 ),
@@ -69,13 +73,15 @@ class _BottomTabNavigationState extends State<BottomTabNavigation> {
                   icon: Icon(
                     Icons.notification_important,
                     size: 36,
+                    color: _selectedIndex == 2 ? Colors.blue : Colors.black,
                   ),
                   onPressed: () => _onItemTapped(2),
                 ),
                 IconButton(
                   icon: Icon(
-                    Icons.verified_user_rounded,
+                    Icons.person,
                     size: 36,
+                    color: _selectedIndex == 3 ? Colors.blue : Colors.black,
                   ),
                   onPressed: () => _onItemTapped(3),
                 ),

@@ -11,6 +11,7 @@ class PetProvider with ChangeNotifier {
       name: "Coco",
       age: 5,
       type: "Dog",
+      birthDate: DateTime.now(),
       photoUrl: "https://picsum.photos/id/237/200/300",
     ),
     Pet(
@@ -18,23 +19,46 @@ class PetProvider with ChangeNotifier {
       name: "Coco",
       age: 5,
       type: "Dog",
+      birthDate: DateTime.now(),
       photoUrl: "https://picsum.photos/id/237/200/300",
     ),
-    Pet(id: 2, name: "Coco", age: 5, type: "Dog"),
-    Pet(id: 3, name: "Coco", age: 5, type: "Dog"),
+    Pet(
+      id: 2,
+      name: "Coco",
+      age: 5,
+      type: "Dog",
+      birthDate: DateTime.now(),
+    ),
+    Pet(
+      id: 3,
+      name: "Coco",
+      age: 5,
+      type: "Dog",
+      birthDate: DateTime.now(),
+    ),
     Pet(
       id: 4,
       name: "Coco",
       age: 5,
       type: "Dog",
+      birthDate: DateTime.now(),
       photoUrl: "https://picsum.photos/id/237/200/300",
     ),
-    Pet(id: 5, name: "Coco", age: 5, type: "Dog"),
+    Pet(
+      id: 5,
+      name: "Coco",
+      age: 5,
+      type: "Cat",
+      birthDate: DateTime.now(),
+    ),
   ];
 
   List<Pet> get pets {
     return [..._petList];
   }
+
+  String _searchString = "";
+  String _filterType = "";
 
   UnmodifiableListView<Pet> get searchPets => _filterType.isEmpty
       ? UnmodifiableListView(_petList)
@@ -52,9 +76,6 @@ class PetProvider with ChangeNotifier {
             },
           ),
         );
-
-  String _searchString = "";
-  String _filterType = "";
 
   void changeSearchString(String searchString) {
     _searchString = searchString;
@@ -82,6 +103,7 @@ class PetProvider with ChangeNotifier {
       name: name,
       age: age,
       type: type,
+      birthDate: DateTime.now(),
       breed: "",
       gender: gender,
       description: "",

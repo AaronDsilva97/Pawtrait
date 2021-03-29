@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pawtrait/constants/pet_type.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/pet.dart';
@@ -37,6 +36,7 @@ class _AllPetsState extends State<AllPets> {
                   height: 5.0,
                 ),
                 Search(
+                  hintText: "Search Pets",
                   onChanged: (value) {
                     searchFilter(context, value);
                   },
@@ -50,8 +50,7 @@ class _AllPetsState extends State<AllPets> {
               (BuildContext context, int index) {
                 return PetCard(
                   width: width,
-                  photoUrl: data[index].photoUrl,
-                  name: data[index].name,
+                  pet: data[index],
                 );
               },
               childCount: data.length,
@@ -69,10 +68,3 @@ class _AllPetsState extends State<AllPets> {
     );
   }
 }
-
-// return InkWell(
-//                   onTap: () => Navigator.pushNamed(
-//                     context,
-//                     "/pet_description",
-//                     arguments: data[index],
-//                   ),

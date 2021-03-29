@@ -11,20 +11,36 @@ class PetNotification extends StatelessWidget {
         children: <Widget>[
           Text("Notification"),
           Expanded(
-              child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: ListView.builder(
               itemCount: 10,
               itemBuilder: (context, index) {
                 return ListTile(
-                  title: Text("Title"),
-                  leading: Text("Leading"),
-                  trailing: Text("Trailing"),
+                  title: Text(
+                    "Wish" +
+                        " " +
+                        "Aaron" +
+                        " " +
+                        "on his" +
+                        " " +
+                        "3rd" +
+                        " " +
+                        "birthday today",
+                  ),
+                  leading: CircleAvatar(
+                    radius: 40,
+                    backgroundImage: NetworkImage(
+                      "https://picsum.photos/200/300",
+                    ),
+                  ),
+                  trailing: ElevatedButton(
+                    onPressed: () {},
+                    child: Text("Wish" + " " + "her"),
+                  ),
                   subtitle: Text("Subtitle"),
                 );
               },
             ),
-          ))
+          ),
         ],
       ),
     );

@@ -4,6 +4,7 @@ class Pet {
   int id;
   String name;
   double age;
+  DateTime birthDate;
   String photoUrl;
   String type;
   String breed;
@@ -14,6 +15,7 @@ class Pet {
     @required this.id,
     @required this.name,
     @required this.age,
+    @required this.birthDate,
     this.breed,
     this.gender,
     this.photoUrl,

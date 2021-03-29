@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:pawtrait/constants/appointment_filter.dart';
 
 class AppointmentChip extends StatefulWidget {
   final List<String> appointmentFilterType;
   final double width;
+  final Function onChanged;
   AppointmentChip({
     @required this.appointmentFilterType,
     @required this.width,
+    @required this.onChanged,
   });
 
   @override
@@ -27,6 +30,7 @@ class _AppointmentChipState extends State<AppointmentChip> {
             widget.appointmentFilterType.length,
             (index) => InkWell(
               onTap: () {
+                widget.onChanged(appointmentFilterType[index]);
                 setState(() {
                   _selectedIndex = index;
                 });

@@ -16,7 +16,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    final fosterList = Provider.of<FosterProvider>(context).fosterList;
+    final fosterList = Provider.of<FosterProvider>(context).searchAppointments;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Container(
@@ -32,10 +32,22 @@ class _HomeState extends State<Home> {
                     user: "Aaron Dsilva",
                     profileImage: "https://picsum.photos/200/300",
                   ),
-                  Search(),
+                  Search(
+                    hintText: "Search Appointments",
+                    onChanged: (value) {
+                      Provider.of<FosterProvider>(
+                        context,
+                        listen: false,
+                      ).changeSearchString(value);
+                    },
+                  ),
                   AppointmentChip(
                     appointmentFilterType: appointmentFilterType,
                     width: width,
+                    onChanged: (value) => Provider.of<FosterProvider>(
+                      context,
+                      listen: false,
+                    ).filterbyDay(value),
                   ),
                 ],
               ),

@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 
 class Search extends StatelessWidget {
   final Function onChanged;
+  final String hintText;
 
-  Search({this.onChanged});
+  Search({
+    @required this.onChanged,
+    @required this.hintText,
+  });
   @override
   Widget build(BuildContext context) {
     return Container(
+      alignment: Alignment.center,
       margin: EdgeInsets.symmetric(
         horizontal: 10.0,
         vertical: 20.0,
@@ -32,8 +37,9 @@ class Search extends StatelessWidget {
       child: TextField(
         decoration: InputDecoration(
           border: InputBorder.none,
-          hintText: "Search appointments",
+          hintText: hintText,
           prefixIcon: Icon(Icons.search),
+          disabledBorder: InputBorder.none,
         ),
         onChanged: onChanged,
       ),
