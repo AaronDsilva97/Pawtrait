@@ -1,101 +1,78 @@
 import 'package:flutter/material.dart';
+import 'package:pawtrait/constants/pet_type.dart';
+import 'package:provider/provider.dart';
 
-final data = [
-  {
-    "id": 1,
-    "name": "Coco",
-    "image": "https://picsum.photos/id/237/200/300",
-  },
-  {
-    "id": 2,
-    "name": "Coco",
-    "image": "https://picsum.photos/id/237/200/300",
-  },
-  {
-    "id": 3,
-    "name": "Coco",
-    "image": "https://picsum.photos/id/237/200/300",
-  },
-  {
-    "id": 4,
-    "name": "Coco",
-    "image": "https://picsum.photos/id/237/200/300",
-  },
-  {
-    "id": 5,
-    "name": "Coco",
-    "image": "https://picsum.photos/id/237/200/300",
-  },
-  {
-    "id": 6,
-    "name": "Coco",
-    "image": "https://picsum.photos/id/237/200/300",
-  },
-  {
-    "id": 7,
-    "name": "Coco",
-    "image": "https://picsum.photos/id/237/200/300",
-  },
-  {
-    "id": 8,
-    "name": "Coco",
-    "image": "https://picsum.photos/id/237/200/300",
-  },
-];
+import '../provider/pet.dart';
+import '../widgets/search.dart';
+import '../widgets/pet_card.dart';
+import '../widgets/filter_pet.dart';
 
-class AllPets extends StatelessWidget {
+class AllPets extends StatefulWidget {
+  @override
+  _AllPetsState createState() => _AllPetsState();
+}
+
+class _AllPetsState extends State<AllPets> {
   @override
   Widget build(BuildContext context) {
-    final orientation = MediaQuery.of(context).orientation;
+    final width = MediaQuery.of(context).size.width;
+
+    final data = Provider.of<PetProvider>(context).searchPets;
+
+    searchFilter(context, value) {
+      Provider.of<PetProvider>(context, listen: false)
+          .changeSearchString(value);
+    }
 
     return Container(
       margin: EdgeInsets.only(
         top: MediaQuery.of(context).padding.top,
       ),
-      child: Column(
-        children: [
-          SizedBox(
-            height: 5.0,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 10.0,
+      child: CustomScrollView(
+        slivers: <Widget>[
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                SizedBox(
+                  height: 5.0,
+                ),
+                Search(
+                  onChanged: (value) {
+                    searchFilter(context, value);
+                  },
+                ),
+                FilterPet(),
+              ],
             ),
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: "Search here",
-                labelText: "Pet Search",
-              ),
-            ),
           ),
-          SizedBox(
-            height: 10.0,
-          ),
-          ElevatedButton(
-            onPressed: () => Navigator.pushNamed(context, "/add_pet"),
-            child: Text("Add Pets"),
-          ),
-          Expanded(
-            child: GridView.builder(
-              itemCount: data.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount:
-                      (orientation == Orientation.portrait) ? 2 : 3),
-              itemBuilder: (BuildContext context, int index) {
-                return Card(
-                  child: GridTile(
-                    footer: Text(data[index]['name']),
-                    child: Image.network(
-                      data[index]['image'],
-                      fit: BoxFit.cover,
-                    ), //just for testing, will fill with image later
-                  ),
+          SliverGrid(
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                return PetCard(
+                  width: width,
+                  photoUrl: data[index].photoUrl,
+                  name: data[index].name,
                 );
               },
+              childCount: data.length,
             ),
-          ),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              // childAspectRatio: width / (width * 1.6),
+              crossAxisSpacing: width * 0.01,
+              mainAxisSpacing: width * 0.01 * 1.6,
+              mainAxisExtent: width * 0.42 * 1.6,
+            ),
+          )
         ],
       ),
     );
   }
 }
+
+// return InkWell(
+//                   onTap: () => Navigator.pushNamed(
+//                     context,
+//                     "/pet_description",
+//                     arguments: data[index],
+//                   ),
