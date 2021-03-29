@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pawtrait/widgets/pet_description_card.dart';
 import '../model/pet.dart';
 
 class PetDescription extends StatelessWidget {
@@ -36,16 +37,26 @@ class PetDescription extends StatelessWidget {
                     ),
                     textAlign: TextAlign.left,
                   ),
-                  Text(
-                    "2 years old",
-                    style: TextStyle(
-                      fontFamily: 'Lato',
-                      fontSize: 20,
-                      color: const Color(0xff000000),
-                      fontWeight: FontWeight.w300,
-                    ),
-                    textAlign: TextAlign.left,
+                  SizedBox(
+                    height: 10.0,
                   ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      PetDescriptionCard(
+                        value: "4 years old",
+                        unit: "Age",
+                      ),
+                      PetDescriptionCard(
+                        value: "Grey",
+                        unit: "Color",
+                      ),
+                      PetDescriptionCard(
+                        value: "4 kg",
+                        unit: "Weight",
+                      ),
+                    ],
+                  )
                 ],
               ),
             ),

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+
 import 'package:pawtrait/widgets/text_field_profile.dart';
 import 'icon_tag.dart';
+import '../provider/auth.dart';
 
 class ProfileCard extends StatefulWidget {
   final double width;
@@ -35,8 +38,15 @@ class _ProfileCardState extends State<ProfileCard> {
     }
   }
 
+  onSaved() {}
+
   @override
   Widget build(BuildContext context) {
+    _name = Provider.of<AuthProvider>(context, listen: false)
+            .firebaseAuth
+            .currentUser
+            .displayName ??
+        "";
     return Form(
       key: _formKey,
       child: Padding(
@@ -79,6 +89,10 @@ class _ProfileCardState extends State<ProfileCard> {
                           if (editMode) {
                             if (_formKey.currentState.validate()) {
                               _formKey.currentState.save();
+                              Provider.of<AuthProvider>(
+                                context,
+                                listen: false,
+                              ).updateDisplayName(_name);
                             }
                           }
                         });
@@ -97,6 +111,12 @@ class _ProfileCardState extends State<ProfileCard> {
                       width: widget.width,
                       icon: Icons.person,
                       hintText: _name,
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return "Name cannot be empty";
+                        }
+                        return null;
+                      },
                       onSaved: (value) {
                         setState(() {
                           _name = value;

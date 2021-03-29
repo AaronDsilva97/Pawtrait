@@ -5,12 +5,14 @@ class ProfileTextField extends StatelessWidget {
   final IconData icon;
   final String hintText;
   final Function onSaved;
+  final Function validator;
 
   ProfileTextField({
     @required this.width,
     @required this.icon,
     @required this.hintText,
     @required this.onSaved,
+    this.validator,
   });
   @override
   Widget build(BuildContext context) {
@@ -26,6 +28,7 @@ class ProfileTextField extends StatelessWidget {
             decoration: InputDecoration(
               hintText: hintText,
             ),
+            validator: validator,
             onSaved: onSaved,
           ),
         ),
