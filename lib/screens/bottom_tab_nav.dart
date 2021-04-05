@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'home.dart';
 import 'all_pets.dart';
-import 'notification.dart';
+// import 'notification.dart';
 import 'profile.dart';
+import 'animated_cat.dart';
 
 class BottomTabNavigation extends StatefulWidget {
   @override
@@ -14,7 +15,8 @@ class _BottomTabNavigationState extends State<BottomTabNavigation> {
   static List<Widget> _widgetOptions = <Widget>[
     Home(),
     AllPets(),
-    PetNotification(),
+    // PetNotification(),
+    AnimatedCat(),
     Profile(),
   ];
 
@@ -28,9 +30,7 @@ class _BottomTabNavigationState extends State<BottomTabNavigation> {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
+      body: _widgetOptions.elementAt(_selectedIndex),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.pushNamed(context, "/add_pet"),

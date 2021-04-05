@@ -1,16 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 import '../model/foster.dart';
+import '../provider/foster.dart';
 
 class AppointmentCard extends StatelessWidget {
   final Foster appointment;
 
-  AppointmentCard({this.appointment});
+  AppointmentCard({@required this.appointment});
   @override
   Widget build(BuildContext context) {
+    if (appointment == null) {
+      return Center(
+        child: Text("No Appointment"),
+      );
+    }
     return InkWell(
       onTap: () {
+        Provider.of<FosterProvider>(
+          context,
+          listen: false,
+        ).changeSearchString(appointment.pet.name);
         Navigator.pushNamed(
           context,
           "/pet_description",

@@ -117,17 +117,22 @@ class FosterProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void addFoster(
-    Pet pet,
-    DateTime startDate,
-    DateTime endDate,
-    User user,
-  ) {
-    _fosterList.add(Foster(
-      pet: pet,
-      startDate: startDate,
-      endDate: endDate,
-      user: user,
-    ));
+  void addFoster({
+    @required Pet pet,
+    @required DateTime startDate,
+    @required DateTime endDate,
+  }) {
+    _fosterList.add(
+      Foster(
+        pet: pet,
+        startDate: startDate,
+        endDate: endDate,
+        user: User(
+          firstName: "Aaron",
+          lastName: "Dsilva",
+        ),
+      ),
+    );
+    notifyListeners();
   }
 }

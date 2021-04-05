@@ -12,7 +12,7 @@ class Auth extends StatefulWidget {
 class _AuthState extends State<Auth> {
   final _formKey = GlobalKey<FormState>();
 
-  bool _auth = true;
+  bool _auth = false;
 
   String _email = "";
   String _password = "";
@@ -102,6 +102,18 @@ class _AuthState extends State<Auth> {
                     child: Text(
                       _auth ? "Register" : "Sign in",
                     ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () =>
+                        Provider.of<AuthProvider>(context, listen: false)
+                            .signInWithGoogle(),
+                    child: Text("Sign in with Google"),
+                  ),
+                  ElevatedButton(
+                    onPressed: () =>
+                        Provider.of<AuthProvider>(context, listen: false)
+                            .signInWithFacebook(),
+                    child: Text("Sign in with Facebook"),
                   ),
                   TextButton(
                     onPressed: () {

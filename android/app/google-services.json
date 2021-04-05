@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "431850626394-cjnv51uosv42be1sm3npsujc6p56ud7f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.theweirdlywired.pawtrait",
+            "certificate_hash": "b085db18d5d3a7855e34bf8e36384edfe758f424"
+          }
+        },
+        {
           "client_id": "431850626394-u680a2em9jih6tenr5il1rv6st30m5tn.apps.googleusercontent.com",
           "client_type": 3
         }

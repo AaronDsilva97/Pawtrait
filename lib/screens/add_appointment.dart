@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+
+import '../model/pet.dart';
+import '../provider/foster.dart';
 
 class AddAppointment extends StatefulWidget {
   static const routeName = "/add_appointment";
-
   @override
   _AddAppointmentState createState() => _AddAppointmentState();
 }
@@ -11,35 +14,42 @@ class AddAppointment extends StatefulWidget {
 class _AddAppointmentState extends State<AddAppointment> {
   final _formKey = GlobalKey<FormState>();
 
-  DateTime startDate = DateTime.now();
-  DateTime endDate = DateTime.now();
+  DateTime _startDate = DateTime.now();
+  DateTime _endDate = DateTime.now();
 
-  _selectDate(BuildContext context, bool value) async {
-    final DateTime picked = await showDatePicker(
+  _selectDate(
+    BuildContext context,
+  ) async {
+    final DateTimeRange picked = await showDateRangePicker(
       context: context,
-      initialDate: value ? startDate : endDate,
-      firstDate: DateTime(2020),
+      firstDate: DateTime.now(),
       lastDate: DateTime(2025),
     );
 
     if (picked != null) {
       setState(() {
-        if (value) {
-          startDate = picked;
-        } else {
-          if (picked.isBefore(startDate)) {
-            return;
-          }
-          endDate = picked;
-        }
+        _startDate = picked.start;
+        _endDate = picked.end;
       });
     }
   }
 
+  _fixAppointment(Pet pet) {
+    Navigator.pop(context);
+    Provider.of<FosterProvider>(
+      context,
+      listen: false,
+    ).addFoster(
+      pet: pet,
+      startDate: _startDate,
+      endDate: _endDate,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    // final Pet pet = ModalRoute.of(context).settings.arguments;
-    // print(pet);
+    final Pet pet = ModalRoute.of(context).settings.arguments;
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Container(
         margin: EdgeInsets.only(
@@ -50,21 +60,45 @@ class _AddAppointmentState extends State<AddAppointment> {
           child: Column(
             children: <Widget>[
               Text("Add Appointment"),
-              // Text(pet.name),
-              ElevatedButton(
-                onPressed: () => _selectDate(context, true),
-                child: Text("Select Start Date"),
+              Text("Check in time"),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Text(
+                    "Start Date " + DateFormat.yMMMMd().format(_startDate),
+                  ),
+                  Text(
+                    "End Date " + DateFormat.yMMMd().format(_endDate),
+                  ),
+                ],
               ),
               ElevatedButton(
-                onPressed: () => _selectDate(context, false),
-                child: Text("Select End Date"),
+                onPressed: () => _selectDate(context),
+                child: Text("Select Date"),
               ),
-              Text(
-                "Start Date " + DateFormat.yMMMMd().format(startDate),
+              Text("Take Notes"),
+              SizedBox(
+                height: 200,
+                width: width * 0.9,
+                child: TextFormField(
+                  minLines: null,
+                  maxLines: null,
+                  keyboardType: TextInputType.multiline,
+                  decoration: InputDecoration(
+                    hintText: 'description',
+                    hintStyle: TextStyle(color: Colors.grey),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    ),
+                  ),
+                ),
               ),
-              Text(
-                "End Date " + DateFormat.yMMMd().format(endDate),
-              ),
+              ElevatedButton(
+                onPressed: () => _fixAppointment(pet),
+                child: Text(
+                  "Fix Appointment",
+                ),
+              )
             ],
           ),
         ),
