@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'home.dart';
 import 'all_pets.dart';
-// import 'notification.dart';
+import 'notification.dart';
 import 'profile.dart';
-import 'animated_cat.dart';
+// import 'animated_cat.dart';
 
 class BottomTabNavigation extends StatefulWidget {
   @override
@@ -15,8 +15,8 @@ class _BottomTabNavigationState extends State<BottomTabNavigation> {
   static List<Widget> _widgetOptions = <Widget>[
     Home(),
     AllPets(),
-    // PetNotification(),
-    AnimatedCat(),
+    PetNotification(),
+    // AnimatedCat(),
     Profile(),
   ];
 
